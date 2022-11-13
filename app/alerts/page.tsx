@@ -3,7 +3,7 @@ import Countdown, { CountdownRenderProps } from "react-countdown";
 import CountdownComp from "./CountdownComp";
 
 const fetchCetus = async () => {
-  const res = await fetch("https://api.warframestat.us/pc/alerts");
+  const res = await fetch("https://api.warframestat.us/pc/alerts?language=en");
 
   const data = await res.json();
   return data;
