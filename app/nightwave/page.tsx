@@ -1,7 +1,9 @@
 import CountdownComp from "../alerts/CountdownComp";
 
 const fetchNight = async () => {
-  const res = await fetch("https://api.warframestat.us/pc/nightwave");
+  const res = await fetch("https://api.warframestat.us/pc/nightwave", {
+    cache: 'no-store'
+  });
   const data = await res.json();
   return data;
 };

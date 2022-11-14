@@ -3,7 +3,9 @@ import CountdownComp from "../alerts/CountdownComp";
 import SortedNormal from "./SortedNormal";
 
 const fetchFissures = async () => {
-  const res = await fetch("https://api.warframestat.us/pc/fissures");
+  const res = await fetch("https://api.warframestat.us/pc/fissures", {
+    cache: 'no-store'
+  });
 
   const data = await res.json();
   return data;
@@ -45,7 +47,23 @@ const Fissures = async () => {
     <div className="flex flex-wrap flex-row p-4">
       <div className=" p-8">
         <p className=" font-extrabold text-3xl">Normal Fissures</p>
-        <SortedNormal data={newData} />
+        {newData
+          .filter((f: fissure) => f.isStorm === false && f.isHard === false)
+          .map((f: fissure) => (
+            <div
+              key={f.id}
+              className=" border-2 border-black m-2 flex flex-col p-2"
+            >
+              <div className=" flex flex-row">
+                <p className="font-bold pr-2">{f.node}</p>
+                <p className=" pr-2">{f.missionType}</p>
+                <p>{f.tier}</p>
+              </div>
+              <p>{f.enemy}</p>
+              <p>Time remaining</p>
+              <CountdownComp time={Date.parse(f.expiry) - Date.now()} />
+            </div>
+          ))}
       </div>
       <div className=" p-8">
         <p className=" font-extrabold text-3xl">Storm Fissures</p>

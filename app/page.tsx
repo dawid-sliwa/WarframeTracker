@@ -3,7 +3,9 @@ import CountdownComp from "./alerts/CountdownComp";
 import CountdownGlobal from "./CountdownGlobal";
 
 const fecthNecData = async () => {
-  const res1 = await fetch("https://api.warframestat.us/pc/cetusCycle");
+  const res1 = await fetch("https://api.warframestat.us/pc/cetusCycle", {
+    cache: 'no-store'
+  });
   const data1 = await res1.json();
  
   const res3 = await fetch(
